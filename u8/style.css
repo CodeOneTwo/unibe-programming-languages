@@ -1,0 +1,20 @@
+
+body {
+    display: grid;
+    grid-template-columns: 20rem 20rem ;
+    grid-gap: 2rem;
+    justify-content: center;
+    /* grid-auto-rows: minmax(100px, auto) */
+}
+section {
+    padding: 20px;
+    background-color: #57b0d2;
+    display:flex;
+    flex-direction: column;
+    border-radius: 0.4rem;
+}
+
+section>a {
+    padding: 1rem 2rem;
+    cursor: pointer;
+}

@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>Platypus</title>
+    <script type="text/javascript">
+      function Animal() {}
+      function Mammal() {
+        Animal.call(this);
+        this.numberOfNipples = 2;
+      }
+      Mammal.prototype.nurse = function () {
+        console.log("nursing");
+      };
+      function Dolphin() {
+        Mammal.call(this);
+      }
+      Dolphin.prototype = Object.create(Mammal.prototype);
+      Dolphin.prototype.swim = function () {
+        console.log("swimming");
+      };
+      function Oviparus() {
+        Animal.call(this);
+      }
+      Oviparus.prototype.spawn = function () {
+        console.log("spawning");
+      };
+      function Snake() {
+        Oviparus.call(this);
+      }
+      Snake.prototype = Object.create(Oviparus.prototype);
+      Snake.prototype.crawl = function () {
+        console.log("crawling");
+      };
+
+      var animal = new Animal();
+      var mammal = new Mammal();
+      var dolphin = new Dolphin();
+      var oviparus = new Oviparus();
+      var snake = new Snake();
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section id="mammal">
+      <a href="Platypus.html#" onclick="mammal.getNumberOfNipples();"
+        >mammal's number of nipples</a
+      >
+    </section>
+    <section id="dolphin">
+      <a onclick="dolphin.swim();">dolphin swimming</a>
+      <a onclick="dolphin.nurse();">dolphin's nursing</a>
+      <a onclick="dolphin.getNumberOfNipples();">dolphin number of nipples</a>
+    </section>
+    <section id="snake">
+      <a onclick="snake.crawl();">snake crawling</a>
+      <a onclick="snake.spawn();">snake spawning</a>
+    </section>
+    <section id="platypus">
+      <a onclick="platypus.nurse();">platypus nursing</a>
+      <a onclick="platypus.spawn();">platypus spawning</a>
+      <a onclick="platypus.getNumberOfNipples();"
+        >platypus's number of nipples</a
+      >
+    </section>
+  </body>
+</html>
