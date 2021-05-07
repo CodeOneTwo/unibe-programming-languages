@@ -3,64 +3,97 @@
     <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
     <title>Platypus</title>
     <script type="text/javascript">
+      function displayTemporarily(id, text) {
+        var el = document.getElementById(id);
+        el.innerHTML = text;
+        el.classList.add("visible");
+        setTimeout(function () {
+          el.classList.remove("visible");
+        }, 2000);
+      }
+
+      // relevant part: (the above code is just fancy displaying things
       function Animal() {}
       function Mammal() {
         Animal.call(this);
         this.numberOfNipples = 2;
       }
       Mammal.prototype.nurse = function () {
-        console.log("nursing");
+        displayTemporarily("mammalNotification", "nursing...");
+      };
+      Mammal.prototype.getNumberOfNipples = function () {
+        displayTemporarily(
+          "mammalNotification",
+          "number of nipples" + this.numberOfNipples
+        );
       };
       function Dolphin() {
         Mammal.call(this);
       }
       Dolphin.prototype = Object.create(Mammal.prototype);
       Dolphin.prototype.swim = function () {
-        console.log("swimming");
+        displayTemporarily("dolphinNotification", "swimming...");
       };
       function Oviparus() {
         Animal.call(this);
       }
       Oviparus.prototype.spawn = function () {
-        console.log("spawning");
+        displayTemporarily("oviparusNotification", "spawning");
       };
       function Snake() {
         Oviparus.call(this);
       }
       Snake.prototype = Object.create(Oviparus.prototype);
       Snake.prototype.crawl = function () {
-        console.log("crawling");
+        displayTemporarily("snakeNotification", "crawling...");
       };
+      function Platypus() {
+        Mammal.call(this);
+        Oviparus.call(this);
+      }
+      Platypus.prototype = Object.create(Mammal.prototype)
+      Platypus.prototype.spawn = Oviparus.prototype.spawn;
 
       var animal = new Animal();
       var mammal = new Mammal();
       var dolphin = new Dolphin();
       var oviparus = new Oviparus();
       var snake = new Snake();
+      var platypus = new Platypus();
     </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <section id="mammal">
-      <a href="Platypus.html#" onclick="mammal.getNumberOfNipples();"
-        >mammal's number of nipples</a
-      >
+      <h1>Mammal</h1>
+      <a onclick="mammal.getNumberOfNipples();">mammal's number of nipples</a>
+      <div id="mammalNotification" class="notification"></div>
     </section>
     <section id="dolphin">
+      <h1>Dolphin</h1>
       <a onclick="dolphin.swim();">dolphin swimming</a>
       <a onclick="dolphin.nurse();">dolphin's nursing</a>
       <a onclick="dolphin.getNumberOfNipples();">dolphin number of nipples</a>
-    </section>
-    <section id="snake">
-      <a onclick="snake.crawl();">snake crawling</a>
-      <a onclick="snake.spawn();">snake spawning</a>
+      <div id="dolphinNotification" class="notification"></div>
     </section>
     <section id="platypus">
+      <h1>Oviparus</h1>
+      <div id="oviparusNotification" class="notification"></div>
+    </section>
+    <section id="snake">
+      <h1>Snake</h1>
+      <a onclick="snake.crawl();">snake crawling</a>
+      <a onclick="snake.spawn();">snake spawning</a>
+      <div id="snakeNotification" class="notification"></div>
+    </section>
+    <section id="platypus">
+      <h1>Platypus</h1>
       <a onclick="platypus.nurse();">platypus nursing</a>
       <a onclick="platypus.spawn();">platypus spawning</a>
       <a onclick="platypus.getNumberOfNipples();"
         >platypus's number of nipples</a
       >
+      <div id="platypusNotification" class="notification"></div>
     </section>
   </body>
 </html>
